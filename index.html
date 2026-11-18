@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raízes do Nordeste - Pedidos e Fidelidade</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="canal-web">
+  <header class="topo">
+    <div class="topo-container">
+      <div class="logo-area">
+        <div class="logo-icone" aria-hidden="true">RN</div>
+        <div>
+          <h1 class="logo-titulo">Raízes do Nordeste</h1>
+          <span class="logo-sub">Lanchonete &amp; Café Regional</span>
+        </div>
+      </div>
+
+      <div class="barra-controles">
+        <div class="campo-topo">
+          <label for="seletorCanal">Visualização:</label>
+          <select id="seletorCanal" aria-label="Alternar formato de tela">
+            <option value="web">Site Web (Desktop)</option>
+            <option value="app">App Celular (Mobile)</option>
+            <option value="totem">Totem Autoatendimento</option>
+          </select>
+        </div>
+
+        <div class="campo-topo">
+          <label for="seletorUnidade">Loja:</label>
+          <select id="seletorUnidade" aria-label="Escolher unidade da franquia"></select>
+        </div>
+
+        <button id="btnAbrirConta" class="botao botao-contorno" type="button">
+          Minha Conta
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="menu-abas" aria-label="Seções do sistema">
+    <button class="aba ativa" data-secao="cardapio" type="button">Cardápio</button>
+    <button class="aba" data-secao="fidelidade" type="button">Clube de Pontos &amp; Cupons</button>
+    <button class="aba" data-secao="pedidos" type="button">Acompanhar Pedido <span id="contadorPedidos" class="contador">0</span></button>
+    <button class="aba" data-secao="privacidade" type="button">Privacidade (LGPD)</button>
+    <button class="aba" data-secao="operacao" type="button">Visão da Loja / Matriz</button>
+  </nav>
+
+  <div id="quadroCanal" class="quadro-canal">
+    <main class="conteudo-principal">
+      <section id="resumoUnidade" class="aviso-unidade" aria-live="polite"></section>
+
+      <!-- ABA 1: CARDÁPIO -->
+      <section id="secao-cardapio" class="secao ativa">
+        <div class="grade-cardapio-layout">
+          <div>
+            <div class="cabecalho-secao">
+              <h2>Itens disponíveis nesta loja</h2>
+              <div id="filtrosCategoria" class="lista-filtros" role="group" aria-label="Filtrar por tipo de prato"></div>
+            </div>
+            <div id="listaProdutos" class="grade-produtos"></div>
+          </div>
+
+          <aside class="painel-sacola" aria-label="Resumo do pedido">
+            <h3>Comanda / Sacola <span id="etiquetaCanal" class="etiqueta">Site Web</span></h3>
+            <div class="opcoes-retirada">
+              <label><input type="radio" name="tipoEntrega" value="Retirada Rápida (Pick-up)" checked /> Retirada Rápida (Pick-up)</label>
+              <label><input type="radio" name="tipoEntrega" value="Consumir no Balcão/Salão" /> Consumir na Loja</label>
+            </div>
+
+            <div id="itensSacola" class="lista-sacola">
+              <p class="texto-vazio">Nenhum item adicionado ainda.</p>
+            </div>
+
+            <div class="caixa-cupom">
+              <input id="campoCupom" type="text" placeholder="Cupom (ex: SAOJOAO10)" aria-label="Digite o cupom" />
+              <button id="btnAplicarCupom" class="botao botao-secundario" type="button">Usar</button>
+            </div>
+            <p id="msgCupom" class="msg-retorno" aria-live="polite"></p>
+
+            <div class="resumo-valores">
+              <div class="linha-valor"><span>Subtotal</span><span id="valorSubtotal">R$ 0,00</span></div>
+              <div class="linha-valor"><span>Descontos aplicados</span><span id="valorDesconto">- R$ 0,00</span></div>
+              <div class="linha-valor linha-total"><span>Total a pagar</span><span id="valorTotal">R$ 0,00</span></div>
+              <div class="previa-pontos">Pontos gerados neste pedido: <strong id="previaPontos">0 pts</strong></div>
+            </div>
+
+            <button id="btnIrPagamento" class="botao botao-primario botao-largo" type="button" disabled>
+              Continuar para Pagamento
+            </button>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ABA 2: FIDELIDADE -->
+      <section id="secao-fidelidade" class="secao">
+        <div class="cabecalho-secao">
+          <h2>Programa de Fidelização e Promoções</h2>
+        </div>
+        <div id="painelSaldoPontos" class="grade-cartoes"></div>
+
+        <h3 class="subtitulo">Trocar pontos por itens ou desconto</h3>
+        <div id="listaRecompensas" class="grade-cartoes"></div>
+
+        <h3 class="subtitulo">Promoções e Campanhas da Rede</h3>
+        <div id="listaCampanhas" class="grade-cartoes"></div>
+      </section>
+
+      <!-- ABA 3: PEDIDOS -->
+      <section id="secao-pedidos" class="secao">
+        <div class="cabecalho-secao">
+          <h2>Andamento dos seus pedidos</h2>
+        </div>
+        <div id="listaPedidosCliente" class="lista-pedidos">
+          <p class="texto-vazio">Você ainda não enviou nenhum pedido nesta sessão.</p>
+        </div>
+      </section>
+
+      <!-- ABA 4: LGPD -->
+      <section id="secao-privacidade" class="secao">
+        <div class="cabecalho-secao">
+          <h2>Seus Dados e Privacidade (LGPD - Lei nº 13.709/2018)</h2>
+        </div>
+        <div class="grade-dupla">
+          <div class="cartao">
+            <h3>Controle de Consentimento</h3>
+            <p class="texto-apoio">
+              Conforme a política da Raízes do Nordeste, você escolhe como seus dados podem ser utilizados e pode alterar ou remover essa autorização quando quiser.
+            </p>
+            <form id="formLgpd" class="form-vertical">
+              <label class="linha-checkbox">
+                <input type="checkbox" checked disabled />
+                <span><strong>Execução do pedido (Obrigatório):</strong> nome ou identificador para chamada no balcão/painel de retirada.</span>
+              </label>
+              <label class="linha-checkbox">
+                <input id="chkLgpdFidelidade" type="checkbox" />
+                <span><strong>Pontuação e Descontos Progressivos:</strong> autorizo guardar meu histórico de compras para somar pontos e calcular descontos.</span>
+              </label>
+              <label class="linha-checkbox">
+                <input id="chkLgpdMarketing" type="checkbox" />
+                <span><strong>Ofertas e Campanhas Regionais:</strong> aceito receber avisos de promoções sazonais (como cardápio de São João).</span>
+              </label>
+              <div class="grupo-botoes">
+                <button class="botao botao-primario" type="submit">Salvar escolhas</button>
+                <button id="btnBaixarDados" class="botao botao-contorno-escuro" type="button">Baixar meus dados (.json)</button>
+                <button id="btnAnonimizar" class="botao botao-perigo" type="button">Anonimizar minha conta</button>
+              </div>
+              <p id="msgLgpd" class="msg-retorno" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="cartao">
+            <h3>Histórico de Acessos e Auditoria</h3>
+            <p class="texto-apoio">Registro das ações feitas na sessão (exigência de rastreabilidade da franqueadora):</p>
+            <ul id="listaAuditoria" class="lista-auditoria"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 5: OPERAÇÃO INTERNA -->
+      <section id="secao-operacao" class="secao">
+        <div class="cabecalho-secao">
+          <h2>Painel Interno (Simulação: Atendente, Cozinha e Gerência)</h2>
+        </div>
+        <div id="resumoOperacao" class="grade-cartoes"></div>
+        <div class="cartao" style="margin-top: 1rem;">
+          <h3>Fila de Preparo da Loja</h3>
+          <p class="texto-apoio">Use os botões abaixo para simular a cozinha preparando o lanche ou o gerente auditando um cancelamento.</p>
+          <div id="filaCozinha"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL DE LOGIN / CADASTRO -->
+  <div id="modalConta" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="tituloModalConta">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <h3 id="tituloModalConta">Identificação do Cliente</h3>
+        <button class="btn-fechar" data-fechar="modalConta" type="button" aria-label="Fechar janela">&times;</button>
+      </div>
+      <div class="modal-corpo">
+        <div id="blocoUsuarioLogado" class="oculto">
+          <p>Cliente identificado: <strong id="lblNomeUsuario"></strong> (<span id="lblIdUsuario"></span>)</p>
+          <p class="texto-apoio">Categoria: <span id="lblNivelUsuario"></span> &bull; Saldo: <strong id="lblPontosUsuario"></strong> pts</p>
+          <button id="btnSairConta" class="botao botao-perigo" type="button">Desconectar</button>
+        </div>
+
+        <form id="formConta">
+          <p class="texto-apoio">Informe seus dados para pontuar ou clique em "Usar cliente de teste" para preencher rápido:</p>
+          <label class="campo">
+            <span>Nome *</span>
+            <input id="inpNome" type="text" required placeholder="Seu nome" />
+          </label>
+          <label class="campo">
+            <span>E-mail *</span>
+            <input id="inpEmail" type="email" required placeholder="seuemail@exemplo.com" />
+          </label>
+          <label class="campo">
+            <span>Faixa de idade (opcional, usado apenas para estatística de cardápio)</span>
+            <select id="inpIdade">
+              <option value="nao-informado">Prefiro não responder</option>
+              <option value="18-24">18 a 24 anos</option>
+              <option value="25-34">25 a 34 anos</option>
+              <option value="35-49">35 a 49 anos</option>
+              <option value="50+">50 anos ou mais</option>
+            </select>
+          </label>
+          <label class="linha-checkbox">
+            <input id="chkAceiteCadastro" type="checkbox" required />
+            <span>Declaro que li o aviso de privacidade e concordo com o uso dos dados informados para atendimento e pontuação (LGPD). *</span>
+          </label>
+          <div class="grupo-botoes">
+            <button class="botao botao-primario" type="submit">Confirmar acesso</button>
+            <button id="btnPreencherTeste" class="botao botao-secundario" type="button">Usar cliente de teste</button>
+          </div>
+          <p id="msgConta" class="msg-retorno" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PAGAMENTO EXTERNO -->
+  <div id="modalPagamento" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="tituloModalPag">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <h3 id="tituloModalPag">Pagamento via Serviço Externo</h3>
+        <button class="btn-fechar" data-fechar="modalPagamento" type="button" aria-label="Fechar janela">&times;</button>
+      </div>
+      <div class="modal-corpo">
+        <div class="caixa-info">
+          <strong>Integração externa:</strong> O sistema da lanchonete não guarda número de cartão nem processa cobrança internamente. Enviamos apenas o valor para a operadora e aguardamos o status.
+        </div>
+        <p>Total da cobrança: <strong id="lblValorPagamento">R$ 0,00</strong></p>
+
+        <label class="campo">
+          <span>Forma de pagamento</span>
+          <select id="selMetodoPag">
+            <option value="PIX">PIX (QR Code / Chave)</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
+          </select>
+        </label>
+
+        <label class="campo">
+          <span>Simular resposta da operadora externa (para teste do corretor)</span>
+          <select id="selSimulacaoRetorno">
+            <option value="aprovado">1. Pagamento Aprovado</option>
+            <option value="recusado">2. Pagamento Recusado pela operadora</option>
+            <option value="erro_rede">3. Queda de conexão / Timeout do serviço externo</option>
+          </select>
+        </label>
+
+        <div id="caixaStatusPagamento" class="status-pag oculto" aria-live="polite"></div>
+
+        <div class="grupo-botoes">
+          <button id="btnConfirmarPagamento" class="botao botao-primario" type="button">Enviar solicitação de pagamento</button>
+          <button class="botao botao-contorno-escuro" data-fechar="modalPagamento" type="button">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aviso inferior LGPD -->
+  <div id="barraLgpd" class="barra-lgpd" role="region" aria-label="Aviso sobre uso de dados">
+    <p>
+      <strong>Transparência e LGPD:</strong> Este protótipo salva dados apenas no navegador local (<code>localStorage</code>) para demonstrar o funcionamento da sacola e dos pontos.
+      <a href="#privacidade" id="linkIrPrivacidade">Conferir opções de privacidade</a>
+    </p>
+    <button id="btnFecharBarraLgpd" class="botao botao-primario botao-pequeno" type="button">Ciente</button>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

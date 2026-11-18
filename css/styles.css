@@ -1,0 +1,682 @@
+/* Folha de estilos - Projeto Multidisciplinar Front-End (Raízes do Nordeste)
+   Abordagem Mobile-First com adaptação para Totem e Desktop */
+
+:root {
+  --fundo: #f8f4ec;
+  --branco: #ffffff;
+  --bege-claro: #efe6d5;
+  --terracota: #a83f14;
+  --terracota-escuro: #822e0c;
+  --amarelo-ocre: #d48817;
+  --marinho: #1f2d3d;
+  --texto: #242424;
+  --texto-suave: #595959;
+  --borda: #dcd2c0;
+  --verde: #1b6e44;
+  --vermelho: #a61e1e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--fundo);
+  color: var(--texto);
+  line-height: 1.45;
+  padding-bottom: 4.5rem;
+}
+
+/* Cabeçalho */
+.topo {
+  background-color: var(--marinho);
+  color: #fff;
+  padding: 0.7rem 1rem;
+}
+
+.topo-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.logo-icone {
+  width: 38px;
+  height: 38px;
+  background-color: var(--amarelo-ocre);
+  color: var(--marinho);
+  font-weight: bold;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-titulo {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.logo-sub {
+  font-size: 0.78rem;
+  color: #d0d7de;
+}
+
+.barra-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.campo-topo {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+}
+
+.campo-topo select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #4d6075;
+  background-color: #131d28;
+  color: #fff;
+  font-size: 0.84rem;
+}
+
+/* Menu de abas */
+.menu-abas {
+  background-color: var(--branco);
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  overflow-x: auto;
+  gap: 0.3rem;
+  padding: 0.45rem 1rem;
+}
+
+.aba {
+  border: 1px solid transparent;
+  background: none;
+  padding: 0.5rem 0.85rem;
+  border-radius: 5px;
+  font-weight: 600;
+  color: var(--texto-suave);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.88rem;
+}
+
+.aba:hover {
+  background-color: var(--bege-claro);
+}
+
+.aba.ativa {
+  background-color: var(--terracota);
+  color: #fff;
+}
+
+.contador {
+  background-color: var(--amarelo-ocre);
+  color: var(--marinho);
+  border-radius: 10px;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
+/* Simulação dos 3 canais (Mobile / Totem / Web) */
+.quadro-canal {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+body.canal-app .quadro-canal {
+  max-width: 395px;
+  border: 5px solid #2b3948;
+  border-radius: 18px;
+  margin-top: 0.8rem;
+  background-color: var(--fundo);
+}
+
+body.canal-totem .quadro-canal {
+  max-width: 740px;
+  border: 6px solid var(--marinho);
+  border-radius: 12px;
+  margin-top: 0.8rem;
+  background-color: var(--fundo);
+}
+
+body.canal-totem .botao,
+body.canal-totem .filtro-btn {
+  padding: 0.8rem 1.1rem;
+  font-size: 1rem;
+}
+
+/* Faixa de informações da unidade */
+.aviso-unidade {
+  background-color: var(--bege-claro);
+  border-left: 4px solid var(--terracota);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.aviso-unidade-detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.84rem;
+  color: var(--texto-suave);
+  margin-top: 0.25rem;
+}
+
+.secao {
+  display: none;
+}
+
+.secao.ativa {
+  display: block;
+}
+
+.cabecalho-secao {
+  margin-bottom: 0.9rem;
+}
+
+.cabecalho-secao h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--marinho);
+}
+
+.subtitulo {
+  margin: 1.4rem 0 0.6rem;
+  color: var(--marinho);
+  font-size: 1.05rem;
+}
+
+/* Filtros */
+.lista-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.filtro-btn {
+  border: 1px solid var(--borda);
+  background-color: var(--branco);
+  padding: 0.35rem 0.75rem;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.84rem;
+}
+
+.filtro-btn.ativo {
+  background-color: var(--marinho);
+  color: #fff;
+  border-color: var(--marinho);
+}
+
+/* Layout Mobile-First do cardápio */
+.grade-cardapio-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+
+.grade-produtos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+.cartao,
+.produto-item {
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.95rem;
+}
+
+.produto-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.produto-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.produto-item h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--marinho);
+}
+
+.etiqueta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background-color: #f9e8c2;
+  color: #7c4a03;
+  white-space: nowrap;
+}
+
+.etiqueta-sazonal {
+  background-color: #fadbd8;
+  color: #8a1c14;
+}
+
+.produto-desc {
+  margin: 0.35rem 0 0;
+  font-size: 0.86rem;
+  color: var(--texto-suave);
+}
+
+.obs-regional {
+  font-size: 0.8rem;
+  color: var(--terracota-escuro);
+  background-color: #fdf5ea;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.4rem;
+}
+
+.produto-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee7da;
+}
+
+.preco {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--terracota);
+}
+
+.info-estoque {
+  font-size: 0.76rem;
+  color: var(--texto-suave);
+}
+
+/* Sacola */
+.painel-sacola {
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1rem;
+  height: fit-content;
+}
+
+.painel-sacola h3 {
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+}
+
+.opcoes-retirada {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.lista-sacola {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.linha-sacola {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed var(--borda);
+  font-size: 0.86rem;
+}
+
+.controles-qtd {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-qtd {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--borda);
+  background-color: var(--bege-claro);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.caixa-cupom {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.caixa-cupom input {
+  flex: 1;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--borda);
+  border-radius: 5px;
+}
+
+.resumo-valores {
+  border-top: 1px solid var(--borda);
+  padding-top: 0.65rem;
+  margin: 0.65rem 0;
+  font-size: 0.88rem;
+}
+
+.linha-valor {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.linha-total {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--marinho);
+  margin-top: 0.35rem;
+}
+
+.previa-pontos {
+  font-size: 0.8rem;
+  color: var(--verde);
+  margin-top: 0.3rem;
+}
+
+/* Botões */
+.botao {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.botao:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botao-pequeno {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+.botao-largo {
+  width: 100%;
+}
+
+.botao-primario {
+  background-color: var(--terracota);
+  color: #fff;
+}
+
+.botao-primario:hover:not(:disabled) {
+  background-color: var(--terracota-escuro);
+}
+
+.botao-secundario {
+  background-color: var(--marinho);
+  color: #fff;
+}
+
+.botao-contorno {
+  background: transparent;
+  border: 1px solid #8ba1b8;
+  color: #fff;
+}
+
+.botao-contorno-escuro {
+  background: transparent;
+  border: 1px solid var(--marinho);
+  color: var(--marinho);
+}
+
+.botao-perigo {
+  background-color: var(--vermelho);
+  color: #fff;
+}
+
+.grupo-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+}
+
+.grade-cartoes,
+.grade-dupla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.linha-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.lista-auditoria {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.81rem;
+  color: var(--texto-suave);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* Pedidos */
+.lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.cartao-pedido {
+  background-color: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.95rem;
+}
+
+.trilha-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+
+.etapa-status {
+  font-size: 0.76rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 12px;
+  background-color: var(--bege-claro);
+  color: var(--texto-suave);
+}
+
+.etapa-status.concluida {
+  background-color: #d1f2d9;
+  color: var(--verde);
+  font-weight: bold;
+}
+
+.etapa-status.cancelada {
+  background-color: #fadbd8;
+  color: var(--vermelho);
+  font-weight: bold;
+}
+
+/* Modais */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.modal-caixa {
+  background-color: var(--branco);
+  border-radius: 8px;
+  max-width: 460px;
+  width: 100%;
+  padding: 1.15rem;
+}
+
+.modal-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.modal-topo h3 {
+  margin: 0;
+}
+
+.btn-fechar {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.86rem;
+}
+
+.campo input,
+.campo select {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--borda);
+  border-radius: 5px;
+}
+
+.caixa-info {
+  background-color: #eef4fa;
+  border-left: 3px solid var(--marinho);
+  padding: 0.6rem;
+  font-size: 0.81rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-pag {
+  padding: 0.65rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  margin-top: 0.65rem;
+}
+
+.status-pag.aguardando { background-color: #fcf3cf; color: #7d6608; }
+.status-pag.sucesso { background-color: #d4efdf; color: var(--verde); }
+.status-pag.erro { background-color: #fadbd8; color: var(--vermelho); }
+
+.barra-lgpd {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--marinho);
+  color: #fff;
+  padding: 0.65rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  z-index: 40;
+}
+
+.barra-lgpd p { margin: 0; }
+.barra-lgpd a { color: #f8c471; }
+
+.texto-apoio { color: var(--texto-suave); font-size: 0.85rem; }
+.texto-vazio { color: var(--texto-suave); font-style: italic; font-size: 0.86rem; }
+.msg-retorno { font-size: 0.82rem; margin: 0.3rem 0 0; min-height: 1em; }
+
+/* Media queries (Tablet e Desktop) */
+@media (min-width: 700px) {
+  .topo-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  body:not(.canal-app) .grade-produtos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  body:not(.canal-app) .grade-cartoes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  body:not(.canal-app) .grade-dupla {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  body.canal-web .grade-cardapio-layout {
+    grid-template-columns: 1.75fr 1fr;
+    align-items: start;
+  }
+
+  body.canal-web .grade-cartoes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
